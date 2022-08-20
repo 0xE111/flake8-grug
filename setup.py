@@ -16,6 +16,7 @@ setuptools.setup(
     url="https://github.com/c0ntribut0r/flake8-grug.git",
     packages=[
         "flake8_grug",
+        "flake8_grug.errors",
     ],
     install_requires=requires,
     entry_points={
