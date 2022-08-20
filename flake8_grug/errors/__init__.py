@@ -5,6 +5,7 @@ from enum import Enum
 class ErrorCode(Enum):
     COPY_PASTE = '001', 'Copy-paste of code'
     MISSING_EARLY_QUIT = '002', 'Missing early quit'
+    USING_EVAL = '003', 'Using eval'
 
 
 @dataclass
