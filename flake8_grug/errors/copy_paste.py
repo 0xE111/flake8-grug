@@ -18,7 +18,7 @@ def iter_error_copy_paste(
     code = ast.unparse(node)
     lines = code.split('\n')
 
-    for i, line in enumerate(lines):
+    for i, line in enumerate(lines[1:], start=1):
         line_stripped = line.strip()
 
         if not line_stripped:
@@ -30,7 +30,7 @@ def iter_error_copy_paste(
         if line.startswith('import') or re.match(r'^from .+ import .+$', line):
             continue
 
-        prev_line = lines[max(0, i - 1)]
+        prev_line = lines[i - 1]
 
         if only_same_length and len(line) != len(prev_line):
             continue
@@ -44,4 +44,4 @@ def iter_error_copy_paste(
             continue
 
         if ratio >= similarity_threshold:
-            yield Error(lineno=i, col_offset=0, code=ErrorCode.COPY_PASTE, snippet='\n'.join(prev_line, line))
+            yield Error(lineno=i + 1, col_offset=0, code=ErrorCode.COPY_PASTE, snippet='\n'.join([prev_line, line]))
