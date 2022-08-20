@@ -25,6 +25,9 @@ class Plugin:
 
 # https://github.com/MartinThoma/flake8-simplify/blob/master/flake8_simplify/__init__.py
 def add_meta(root: ast.AST, level: int = 0) -> None:
+    if level == 0:
+        root.parent = None
+
     previous_sibling = None
     for node in ast.iter_child_nodes(root):
         if level == 0:
