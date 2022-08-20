@@ -1,2 +1,2 @@
-# flake8-axel
+# flake8-grug
 Flake8 plugin
