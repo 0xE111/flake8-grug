@@ -6,6 +6,7 @@ class ErrorCode(Enum):
     COPY_PASTE = '001', 'Copy-paste of code'
     MISSING_EARLY_QUIT = '002', 'Missing early quit'
     USING_EVAL = '003', 'Using eval'
+    TRY_TOO_MUCH = '004', 'Too big "try" code block'
 
 
 @dataclass
