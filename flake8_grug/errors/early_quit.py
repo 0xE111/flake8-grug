@@ -5,7 +5,7 @@ from . import Error, ErrorCode
 
 def get_error_early_quit(node: ast.If, max_else_lines: int = 3) -> Error | None:
     assert isinstance(node, ast.If)
-    if isinstance(node.orelse, ast.If):  # if second "if"
+    if isinstance(node.orelse, ast.If) or not node.orelse:  # if second "if" or no second route at all
         return
 
     if len(node.orelse) > max_else_lines:
