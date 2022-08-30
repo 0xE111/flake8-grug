@@ -12,12 +12,14 @@ class Plugin:
     version: ClassVar[str] = importlib.metadata.version(__name__)  # type: ignore
 
     tree: ast.AST
+    lines: list[str]
 
     def __post_init__(self):
         add_meta(self.tree)
 
     def run(self) -> Generator[tuple[int, int, str, Type[Any]], None, None]:
         visitor = Visitor()
+        visitor.lines = self.lines
         visitor.visit(self.tree)
         for error in visitor.errors:
             yield (error.lineno, error.col_offset, error.message, type(self))

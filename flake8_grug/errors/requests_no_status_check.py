@@ -4,11 +4,12 @@ from . import Error, ErrorCode, get_root
 
 
 def get_error_requests_no_status_check(node: ast.Call) -> Error | None:
+    # this captures only `res = requests.get/post`, not `from requests import get; get(...)`
     assert isinstance(node, ast.Call)
 
-    # this captures only `res = requests.get/post`, not `from requests import get; get(...)`
     if not (
         isinstance(node.func, ast.Attribute) and
+        isinstance(node.func.value, ast.Name) and
         node.func.value.id == 'requests' and
         node.func.attr in {'get', 'post'}
     ):

@@ -15,7 +15,7 @@ class Visitor(ast.NodeVisitor):
 
     def visit(self, node: ast.AST):
         if not node.parent:  # root node
-            self.errors.extend(iter_error_copy_paste(node))
+            self.errors.extend(iter_error_copy_paste(self.lines))
 
         super().visit(node)
 

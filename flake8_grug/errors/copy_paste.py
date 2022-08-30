@@ -8,15 +8,10 @@ from . import Error, ErrorCode
 
 
 def iter_error_copy_paste(
-    node: ast.AST,
+    lines: list[str],
     similarity_threshold: float = 0.9,
     only_same_length: bool = True,
 ) -> Iterator[Error]:
-
-
-    assert not node.parent
-    code = ast.unparse(node)
-    lines = code.split('\n')
 
     for i, line in enumerate(lines[1:], start=1):
         line_stripped = line.strip()
